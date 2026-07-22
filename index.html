@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoho Desk — Deliver Exceptional Customer Support</title>
+<meta name="description" content="Zoho Desk is a context-aware customer service software that helps businesses deliver personalized, omnichannel support powered by AI, automation, and smart workflows.">
+<meta name="keywords" content="Zoho Desk, customer support software, help desk, omnichannel support, Zia AI, ticketing system">
+<meta property="og:title" content="Zoho Desk — Deliver Exceptional Customer Support">
+<meta property="og:description" content="Modern customer service platform built for businesses of every size. AI-powered, omnichannel, and endlessly automatable.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zoho Desk — Deliver Exceptional Customer Support">
+<meta name="twitter:description" content="Modern customer service platform built for businesses of every size.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollBar"></div></div>
+
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="loader__inner">
+    <svg class="loader__logo" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#loaderGrad)"/>
+      <path d="M20 24H44L20 40H44" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="loaderGrad" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#3B82F6"/>
+          <stop offset="0.5" stop-color="#06B6D4"/>
+          <stop offset="1" stop-color="#8B5CF6"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="loader__bar"><div class="loader__bar-fill" id="loaderFill"></div></div>
+    <p class="loader__text" id="loaderText">Initializing Workspace...</p>
+  </div>
+</div>
+
+<div class="aurora" aria-hidden="true">
+  <span class="blob blob--1"></span>
+  <span class="blob blob--2"></span>
+  <span class="blob blob--3"></span>
+  <div class="grid-overlay"></div>
+  <canvas id="particles"></canvas>
+</div>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#home" class="logo" aria-label="Zoho Desk home">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#navGrad)"/>
+        <path d="M20 24H44L20 40H44" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="navGrad" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3B82F6"/><stop offset="0.5" stop-color="#06B6D4"/><stop offset="1" stop-color="#8B5CF6"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span>Zoho <strong>Desk</strong></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#why">Benefits</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header__actions">
+      <a href="#cta" class="btn btn--magnetic btn--primary btn--sm">
+        <span>Start Free Trial</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#why">Benefits</a>
+    <a href="#integrations">Integrations</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#cta" class="btn btn--primary">Start Free Trial</a>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <div class="eyebrow" data-aos="fade-up"><span class="eyebrow__dot"></span> Trusted by 100,000+ support teams</div>
+        <h1 class="hero__title">
+          <span class="reveal-line">Deliver Exceptional</span>
+          <span class="reveal-line">Customer Support</span>
+          <span class="reveal-line gradient-text">Powered by Zoho Desk.</span>
+        </h1>
+        <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="200">
+          A modern customer service platform built for businesses of every size —
+          unify every channel, automate every workflow, and let context-aware AI
+          help your team resolve tickets faster.
+        </p>
+        <div class="hero__actions" data-aos="fade-up" data-aos-delay="300">
+          <a href="#cta" class="btn btn--magnetic btn--primary btn--lg">
+            <span>Get Started</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button class="btn btn--ghost btn--lg" id="watchDemo">
+            <span class="play-icon"><i class="fa-solid fa-play"></i></span>
+            Watch Demo
+          </button>
+        </div>
+        <div class="hero__trust" data-aos="fade-up" data-aos-delay="400">
+          <div class="avatars">
+            <span class="avatar avatar--1"></span>
+            <span class="avatar avatar--2"></span>
+            <span class="avatar avatar--3"></span>
+            <span class="avatar avatar--4"></span>
+          </div>
+          <p>Rated <strong>4.8/5</strong> by support leaders worldwide</p>
+        </div>
+      </div>
+
+      <div class="hero__visual" data-aos="fade-left" data-aos-delay="200">
+        <div class="dash-card dash-card--main tilt-card">
+          <div class="dash-card__top">
+            <span class="dot dot--red"></span><span class="dot dot--yellow"></span><span class="dot dot--green"></span>
+            <span class="dash-card__title">Ticket #4821 · Priya Nair</span>
+          </div>
+          <div class="dash-card__body">
+            <div class="chat-line chat-line--in">Hi, my order hasn't shipped yet.</div>
+            <div class="chat-line chat-line--out">I can help — checking your order status now.</div>
+            <div class="zia-suggestion">
+              <i class="fa-solid fa-sparkles"></i>
+              <span>Zia suggests: <strong>Shipping delay reply</strong></span>
+            </div>
+            <div class="mini-chart">
+              <span style="--h:40%"></span><span style="--h:65%"></span><span style="--h:50%"></span>
+              <span style="--h:80%"></span><span style="--h:60%"></span><span style="--h:95%"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-card dash-card--float dash-card--tickets floating" data-aos="fade-up" data-aos-delay="500">
+          <i class="fa-solid fa-ticket"></i>
+          <div><strong>128</strong><span>Open Tickets</span></div>
+        </div>
+
+        <div class="dash-card dash-card--float dash-card--csat floating" data-aos="fade-up" data-aos-delay="650">
+          <i class="fa-solid fa-face-smile"></i>
+          <div><strong>96%</strong><span>Happiness Score</span></div>
+        </div>
+
+        <div class="dash-card dash-card--float dash-card--notif floating" data-aos="fade-up" data-aos-delay="800">
+          <i class="fa-solid fa-bell"></i>
+          <span>New ticket assigned to <strong>Team Alpha</strong></span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll-cue"><span></span> Scroll to explore</div>
+  </section>
+
+  <!-- LOGOS STRIP -->
+  <section class="logo-strip" data-aos="fade-up">
+    <div class="container">
+      <p class="logo-strip__label">Works seamlessly across the Zoho ecosystem</p>
+      <div class="logo-strip__row">
+        <span><i class="fa-solid fa-address-card"></i> Zoho CRM</span>
+        <span><i class="fa-solid fa-comments"></i> SalesIQ</span>
+        <span><i class="fa-solid fa-diagram-project"></i> Projects</span>
+        <span><i class="fa-solid fa-book"></i> Books</span>
+        <span><i class="fa-solid fa-chart-line"></i> Analytics</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="eyebrow"><span class="eyebrow__dot"></span> Features</div>
+        <h2>Everything your support team needs, <span class="gradient-text">in one place</span></h2>
+        <p>From first response to final resolution, Zoho Desk gives every agent the context and tools to help customers faster.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="feature-card__icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+          <h3>Omnichannel Support</h3>
+          <p>Bring email, chat, phone, social, and web conversations into a single, unified ticket view.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="feature-card__icon"><i class="fa-solid fa-sparkles"></i></div>
+          <h3>Zia — AI Assistant</h3>
+          <p>An AI assistant that drafts replies, detects sentiment, and surfaces answers before agents even ask.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="feature-card__icon"><i class="fa-solid fa-gears"></i></div>
+          <h3>Workflow Automation</h3>
+          <p>Automate assignment, escalation, and follow-ups with rules that fit the way your team already works.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="feature-card__icon"><i class="fa-solid fa-ticket"></i></div>
+          <h3>Ticket Management</h3>
+          <p>Prioritize, tag, and track every conversation with a view built for high-volume support teams.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="feature-card__icon"><i class="fa-solid fa-book-open"></i></div>
+          <h3>Knowledge Base</h3>
+          <p>Turn recurring questions into searchable self-service articles customers can find on their own.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="feature-card__icon"><i class="fa-solid fa-face-smile"></i></div>
+          <h3>Customer Happiness</h3>
+          <p>Collect ratings after every interaction and track satisfaction trends across agents and teams.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="feature-card__icon"><i class="fa-solid fa-chart-simple"></i></div>
+          <h3>Analytics &amp; Reports</h3>
+          <p>Custom dashboards reveal response times, agent load, and satisfaction at a glance.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="feature-card__icon"><i class="fa-solid fa-diagram-project"></i></div>
+          <h3>Blueprint</h3>
+          <p>Model your exact support process as a guided, step-by-step workflow agents can't skip.</p>
+        </article>
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="feature-card__icon"><i class="fa-solid fa-stopwatch"></i></div>
+          <h3>SLA Management</h3>
+          <p>Set response and resolution targets, with automatic escalation when a ticket is at risk.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ZOHO DESK / TIMELINE -->
+  <section class="why" id="why">
+    <div class="container why__grid">
+      <div class="why__visual" data-aos="fade-right">
+        <div class="why__mock tilt-card">
+          <div class="why__mock-header">
+            <span class="dot dot--red"></span><span class="dot dot--yellow"></span><span class="dot dot--green"></span>
+          </div>
+          <div class="why__mock-body">
+            <div class="timeline-row"><i class="fa-solid fa-envelope"></i> Email received <span>0:02</span></div>
+            <div class="timeline-row"><i class="fa-solid fa-robot"></i> Zia drafted a reply <span>0:04</span></div>
+            <div class="timeline-row"><i class="fa-solid fa-route"></i> Auto-routed to Billing <span>0:05</span></div>
+            <div class="timeline-row"><i class="fa-solid fa-circle-check"></i> Resolved by agent <span>2:14</span></div>
+            <div class="progress-ring">
+              <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" class="ring-bg"/>
+                <circle cx="60" cy="60" r="52" class="ring-fg" id="whyRing"/>
+              </svg>
+              <span>92% Faster</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why__content">
+        <div class="eyebrow" data-aos="fade-up"><span class="eyebrow__dot"></span> Why Zoho Desk</div>
+        <h2 data-aos="fade-up">Built to make support <span class="gradient-text">effortless</span></h2>
+
+        <div class="why-item" data-aos="fade-up" data-aos-delay="0">
+          <div class="why-item__icon"><i class="fa-solid fa-brain"></i></div>
+          <div><h4>AI-powered support</h4><p>Zia reads tone, flags urgency, and recommends the next best action for every ticket.</p></div>
+        </div>
+        <div class="why-item" data-aos="fade-up" data-aos-delay="80">
+          <div class="why-item__icon"><i class="fa-solid fa-bolt"></i></div>
+          <div><h4>Automation that scales</h4><p>Repetitive work runs itself, so agents spend time on conversations that need a human.</p></div>
+        </div>
+        <div class="why-item" data-aos="fade-up" data-aos-delay="160">
+          <div class="why-item__icon"><i class="fa-solid fa-comments"></i></div>
+          <div><h4>Omnichannel by design</h4><p>One inbox for every channel means no conversation ever falls through the cracks.</p></div>
+        </div>
+        <div class="why-item" data-aos="fade-up" data-aos-delay="240">
+          <div class="why-item__icon"><i class="fa-solid fa-sliders"></i></div>
+          <div><h4>Easy customization</h4><p>Layouts, fields, and workflows adapt to your process, not the other way around.</p></div>
+        </div>
+        <div class="why-item" data-aos="fade-up" data-aos-delay="320">
+          <div class="why-item__icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+          <div><h4>Scalable architecture</h4><p>From five agents to five thousand, performance stays consistent as you grow.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container stats__grid">
+      <div class="stat-card" data-aos="fade-up">
+        <span class="stat-card__num" data-count="100000" data-suffix="+">0</span>
+        <span class="stat-card__label">Businesses</span>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="80">
+        <span class="stat-card__num" data-count="50" data-suffix="+">0</span>
+        <span class="stat-card__label">Channels</span>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="160">
+        <span class="stat-card__num" data-count="99.9" data-suffix="%" data-decimal="1">0</span>
+        <span class="stat-card__label">Reliability</span>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="240">
+        <span class="stat-card__num" data-count="24" data-suffix="/7">0</span>
+        <span class="stat-card__label">Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="integrations" id="integrations">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="eyebrow"><span class="eyebrow__dot"></span> Integrations</div>
+        <h2>Connects with the tools <span class="gradient-text">you already use</span></h2>
+        <p>Zoho Desk plugs into your existing stack, so support never works in isolation.</p>
+      </div>
+      <div class="integration-grid">
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="0"><i class="fa-solid fa-address-card"></i><span>CRM</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="40"><i class="fa-solid fa-comments"></i><span>SalesIQ</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="80"><i class="fa-solid fa-diagram-project"></i><span>Projects</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="120"><i class="fa-solid fa-book"></i><span>Books</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="160"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="200"><i class="fa-brands fa-slack"></i><span>Slack</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="240"><i class="fa-brands fa-microsoft"></i><span>Teams</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="280"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="320"><i class="fa-solid fa-envelope"></i><span>Email</span></div>
+        <div class="integration-card" data-aos="zoom-in" data-aos-delay="360"><i class="fa-solid fa-share-nodes"></i><span>Social Media</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="screenshots">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="eyebrow"><span class="eyebrow__dot"></span> Inside the product</div>
+        <h2>A workspace built for <span class="gradient-text">focus</span></h2>
+      </div>
+      <div class="screen-tabs" data-aos="fade-up">
+        <button class="screen-tab active" data-target="0">Ticket View</button>
+        <button class="screen-tab" data-target="1">Analytics</button>
+        <button class="screen-tab" data-target="2">Customer Timeline</button>
+        <button class="screen-tab" data-target="3">Automation</button>
+      </div>
+
+      <div class="screen-panels" data-aos="fade-up" data-aos-delay="120">
+        <div class="screen-panel active" data-panel="0">
+          <div class="screen-mock">
+            <div class="screen-mock__side">
+              <div class="side-item active"><i class="fa-solid fa-inbox"></i> All Tickets <span>128</span></div>
+              <div class="side-item"><i class="fa-solid fa-circle-exclamation"></i> Overdue <span>4</span></div>
+              <div class="side-item"><i class="fa-solid fa-star"></i> My Tickets <span>32</span></div>
+            </div>
+            <div class="screen-mock__main">
+              <div class="ticket-row"><span class="badge badge--high">High</span> Payment failed on checkout</div>
+              <div class="ticket-row"><span class="badge badge--med">Medium</span> Feature request: dark mode</div>
+              <div class="ticket-row"><span class="badge badge--low">Low</span> Question about billing cycle</div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-panel" data-panel="1">
+          <div class="screen-mock screen-mock--analytics">
+            <div class="mini-chart mini-chart--lg">
+              <span style="--h:35%"></span><span style="--h:55%"></span><span style="--h:40%"></span>
+              <span style="--h:70%"></span><span style="--h:60%"></span><span style="--h:90%"></span>
+              <span style="--h:75%"></span><span style="--h:85%"></span>
+            </div>
+          </div>
+        </div>
+        <div class="screen-panel" data-panel="2">
+          <div class="screen-mock">
+            <div class="cust-timeline">
+              <div class="cust-timeline__row"><i class="fa-solid fa-user"></i> Customer signed up <span>Jan 2024</span></div>
+              <div class="cust-timeline__row"><i class="fa-solid fa-cart-shopping"></i> First purchase <span>Feb 2024</span></div>
+              <div class="cust-timeline__row"><i class="fa-solid fa-headset"></i> Opened 3 tickets <span>2025</span></div>
+              <div class="cust-timeline__row"><i class="fa-solid fa-heart"></i> Happiness: 96% <span>Now</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-panel" data-panel="3">
+          <div class="screen-mock">
+            <div class="automation-flow">
+              <div class="flow-node">Ticket Created</div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node">Auto-tag: Billing</div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node">Assign to Team</div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node flow-node--end">Notify Agent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="eyebrow"><span class="eyebrow__dot"></span> Testimonials</div>
+        <h2>Loved by support teams <span class="gradient-text">everywhere</span></h2>
+      </div>
+
+      <div class="testimonial-slider" data-aos="fade-up" data-aos-delay="120">
+        <div class="testimonial-track" id="testiTrack">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Zoho Desk cut our average response time in half. Zia's suggested replies alone saved our team hours every week."</p>
+            <div class="testimonial-author"><span class="avatar avatar--1"></span><div><strong>Meera Krishnan</strong><span>Head of Support, Finlytics</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"The Blueprint feature finally got every agent following the same process, without a single spreadsheet."</p>
+            <div class="testimonial-author"><span class="avatar avatar--2"></span><div><strong>Daniel Ortiz</strong><span>Support Ops Lead, Nimbus Retail</span></div></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Omnichannel support meant we finally stopped losing conversations between email and chat."</p>
+            <div class="testimonial-author"><span class="avatar avatar--3"></span><div><strong>Aiko Tanaka</strong><span>CX Manager, Haruki Foods</span></div></div>
+          </div>
+        </div>
+        <div class="testimonial-dots" id="testiDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container faq__grid">
+      <div class="section-head section-head--left" data-aos="fade-right">
+        <div class="eyebrow"><span class="eyebrow__dot"></span> FAQ</div>
+        <h2>Questions, <span class="gradient-text">answered</span></h2>
+        <p>Can't find what you're looking for? Reach out to our support team any time.</p>
+      </div>
+
+      <div class="accordion" data-aos="fade-left">
+        <div class="accordion-item active">
+          <button class="accordion-trigger">
+            What is Zoho Desk?
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="accordion-panel">
+            <p>Zoho Desk is a context-aware help desk software that lets businesses manage customer support activities efficiently across email, chat, phone, social media, and self-service portals.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            Does Zoho Desk include an AI assistant?
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="accordion-panel">
+            <p>Yes. Zia, Zoho Desk's built-in AI assistant, drafts replies, detects sentiment, tags tickets, and suggests knowledge base articles to help agents resolve issues faster.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            Can I automate my support workflows?
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="accordion-panel">
+            <p>Workflow rules, Blueprints, and SLA escalations let you automate ticket assignment, approvals, and follow-ups to match your exact support process.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            Does it integrate with other Zoho apps?
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="accordion-panel">
+            <p>Zoho Desk connects natively with Zoho CRM, SalesIQ, Projects, Books, and Analytics, along with Slack, Microsoft Teams, WhatsApp, and email.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">
+            Is there a free trial?
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="accordion-panel">
+            <p>Yes, you can start a free trial with no credit card required and explore every plan feature before you commit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="cta__glow" aria-hidden="true"></div>
+    <div class="container cta__inner" data-aos="zoom-in">
+      <h2>Ready to Transform <span class="gradient-text">Customer Support?</span></h2>
+      <p>Join thousands of businesses delivering faster, smarter support with Zoho Desk.</p>
+      <div class="cta__actions">
+        <a href="#" class="btn btn--magnetic btn--primary btn--lg"><span>Start Free Trial</span><i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#contact" class="btn btn--ghost btn--lg">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="footer__glow" aria-hidden="true"></div>
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="#home" class="logo">
+        <svg width="30" height="30" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#footGrad)"/>
+          <path d="M20 24H44L20 40H44" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="footGrad" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3B82F6"/><stop offset="0.5" stop-color="#06B6D4"/><stop offset="1" stop-color="#8B5CF6"/>
+          </linearGradient></defs>
+        </svg>
+        <span>Zoho <strong>Desk</strong></span>
+      </a>
+      <p>Context-aware customer service software for businesses of every size.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h4>Products</h4>
+      <a href="#">Zoho Desk</a>
+      <a href="#">Zoho CRM</a>
+      <a href="#">SalesIQ</a>
+      <a href="#">Zoho Books</a>
+    </div>
+    <div class="footer__col">
+      <h4>Resources</h4>
+      <a href="#">Documentation</a>
+      <a href="#">API Reference</a>
+      <a href="#">Knowledge Base</a>
+      <a href="#">Webinars</a>
+    </div>
+    <div class="footer__col">
+      <h4>Community</h4>
+      <a href="#">Forums</a>
+      <a href="#">Events</a>
+      <a href="#">Partners</a>
+      <a href="#">Developers</a>
+    </div>
+    <div class="footer__col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Contact Sales</a>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© 2026 Zoho Corporation Pvt. Ltd. All rights reserved.</p>
+    <div class="footer__legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+<div class="demo-modal" id="demoModal" role="dialog" aria-hidden="true">
+  <div class="demo-modal__backdrop" id="demoBackdrop"></div>
+  <div class="demo-modal__box">
+    <button class="demo-modal__close" id="demoClose" aria-label="Close demo"><i class="fa-solid fa-xmark"></i></button>
+    <div class="demo-modal__screen">
+      <i class="fa-solid fa-play"></i>
+      <p>Product demo preview</p>
+    </div>
+  </div>
+</div>
+
+<script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zoho.com/widget?wc=siq0335ec36ac643996984a4b7b4b13fee940e25ec0a509856b2ff181e0adfae994" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
