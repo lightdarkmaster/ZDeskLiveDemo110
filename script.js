@@ -50,23 +50,30 @@ document.addEventListener('DOMContentLoaded', () => {
     AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 60 });
   }
 
-  /* ---------- Header scroll state ---------- */
+  /* ---------- Header scroll state + progress bar (single rAF-throttled listener) ---------- */
   const header = document.getElementById('header');
-  const onScrollHeader = () => {
+  const scrollBar = document.getElementById('scrollBar');
+  let scrollTicking = false;
+
+  const updateOnScroll = () => {
     if (window.scrollY > 40) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
-  };
-  window.addEventListener('scroll', onScrollHeader, { passive: true });
-  onScrollHeader();
 
-  /* ---------- Scroll progress bar ---------- */
-  const scrollBar = document.getElementById('scrollBar');
-  const updateScrollBar = () => {
     const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    const max = h.scrollHeight - h.clientHeight;
+    const scrolled = max > 0 ? (h.scrollTop / max) * 100 : 0;
     if (scrollBar) scrollBar.style.width = scrolled + '%';
+
+    scrollTicking = false;
   };
-  window.addEventListener('scroll', updateScrollBar, { passive: true });
+
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(updateOnScroll);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+  updateOnScroll();
 
   /* ---------- Mobile nav ---------- */
   const hamburger = document.getElementById('hamburger');
@@ -82,43 +89,66 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileNav.classList.remove('active');
   }));
 
-  /* ---------- Cursor glow (desktop only) ---------- */
+  /* ---------- Pointer-driven effects: cursor glow, magnetic buttons, tilt cards ----------
+     All three read from a single mousemove listener and write on a single shared
+     requestAnimationFrame loop, so fast mouse movement never queues more than
+     one DOM write per frame. */
   const cursorGlow = document.querySelector('.cursor-glow');
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
-  if (cursorGlow && !isTouch) {
+  const magneticBtns = document.querySelectorAll('.btn--magnetic');
+  const tiltCards = document.querySelectorAll('.tilt-card');
+
+  if (isTouch) {
+    if (cursorGlow) cursorGlow.style.display = 'none';
+  } else {
+    let mouseX = 0, mouseY = 0;
+    let pointerTicking = false;
+    let hoveredBtn = null;
+    let hoveredCard = null;
+
+    const applyPointerEffects = () => {
+      if (cursorGlow) {
+        cursorGlow.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%,-50%)`;
+      }
+      if (hoveredBtn) {
+        const rect = hoveredBtn.getBoundingClientRect();
+        const x = mouseX - rect.left - rect.width / 2;
+        const y = mouseY - rect.top - rect.height / 2;
+        hoveredBtn.style.transform = `translate(${x * 0.25}px, ${y * 0.4}px)`;
+      }
+      if (hoveredCard) {
+        const rect = hoveredCard.getBoundingClientRect();
+        const px = (mouseX - rect.left) / rect.width - 0.5;
+        const py = (mouseY - rect.top) / rect.height - 0.5;
+        hoveredCard.style.transform = `perspective(900px) rotateY(${px * 8}deg) rotateX(${-py * 8}deg)`;
+      }
+      pointerTicking = false;
+    };
+
     window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
-    });
-  } else if (cursorGlow) {
-    cursorGlow.style.display = 'none';
-  }
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!pointerTicking) {
+        requestAnimationFrame(applyPointerEffects);
+        pointerTicking = true;
+      }
+    }, { passive: true });
 
-  /* ---------- Magnetic buttons ---------- */
-  if (!isTouch) {
-    document.querySelectorAll('.btn--magnetic').forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.25}px, ${y * 0.4}px)`;
-      });
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mouseenter', () => { hoveredBtn = btn; btn.style.willChange = 'transform'; });
       btn.addEventListener('mouseleave', () => {
+        hoveredBtn = null;
         btn.style.transform = 'translate(0,0)';
+        btn.style.willChange = 'auto';
       });
     });
-  }
 
-  /* ---------- Tilt cards ---------- */
-  if (!isTouch) {
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(900px) rotateY(${px * 8}deg) rotateX(${-py * 8}deg)`;
-      });
+    tiltCards.forEach(card => {
+      card.addEventListener('mouseenter', () => { hoveredCard = card; card.style.willChange = 'transform'; });
       card.addEventListener('mouseleave', () => {
+        hoveredCard = null;
         card.style.transform = 'perspective(900px) rotateY(0) rotateX(0)';
+        card.style.willChange = 'auto';
       });
     });
   }
@@ -244,17 +274,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Particle background ---------- */
   const canvas = document.getElementById('particles');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas && !prefersReducedMotion) {
+    const ctx = canvas.getContext('2d', { alpha: true });
     let particles = [];
-    const count = window.innerWidth < 700 ? 30 : 60;
+    let rafId = null;
+    let running = false;
+    const count = window.innerWidth < 700 ? 24 : 45;
 
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    resize();
-    window.addEventListener('resize', resize);
 
     function createParticles() {
       particles = Array.from({ length: count }, () => ({
@@ -265,21 +297,50 @@ document.addEventListener('DOMContentLoaded', () => {
         alpha: Math.random() * 0.5 + 0.15
       }));
     }
-    createParticles();
 
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(148,197,255,${p.alpha})`;
         ctx.fill();
         p.y -= p.vy;
         if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
-      });
-      requestAnimationFrame(drawParticles);
+      }
+      rafId = requestAnimationFrame(drawParticles);
     }
-    drawParticles();
+
+    function start() {
+      if (running) return;
+      running = true;
+      rafId = requestAnimationFrame(drawParticles);
+    }
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    resize();
+    createParticles();
+    start();
+
+    // Debounced resize — avoids rebuilding the particle field on every pixel of a drag-resize
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        createParticles();
+      }, 200);
+    });
+
+    // Pause the canvas loop entirely when the tab is in the background
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
   }
 
   /* ---------- GSAP text reveal + scroll animations ---------- */

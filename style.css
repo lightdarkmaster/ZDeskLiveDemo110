@@ -92,8 +92,9 @@ a:focus-visible, button:focus-visible{
   position:fixed; inset:0; z-index:-2; overflow:hidden; background:var(--c-primary);
 }
 .blob{
-  position:absolute; border-radius:50%; filter:blur(90px); opacity:.55;
+  position:absolute; border-radius:50%; filter:blur(70px); opacity:.55;
   will-change: transform;
+  contain: layout paint;
 }
 .blob--1{ width:520px; height:520px; background:var(--c-accent); top:-10%; left:-8%; animation: blobMove1 22s ease-in-out infinite; }
 .blob--2{ width:600px; height:600px; background:var(--c-accent-3); bottom:-15%; right:-10%; animation: blobMove2 26s ease-in-out infinite; }
@@ -243,12 +244,10 @@ a:focus-visible, button:focus-visible{
 .avatar{
   width:36px; height:36px; border-radius:50%; border:2px solid var(--c-primary);
   margin-left:-10px; background: var(--gradient-main);
+  object-fit:cover; flex-shrink:0;
 }
 .avatars .avatar:first-child{ margin-left:0; }
-.avatar--1{ background: linear-gradient(135deg,#3B82F6,#06B6D4); }
-.avatar--2{ background: linear-gradient(135deg,#8B5CF6,#3B82F6); }
-.avatar--3{ background: linear-gradient(135deg,#06B6D4,#8B5CF6); }
-.avatar--4{ background: linear-gradient(135deg,#3B82F6,#8B5CF6); }
+.avatar--lg{ width:48px; height:48px; border-width:0; }
 .hero__trust p{ margin:0; font-size:.88rem; }
 .hero__trust strong{ color:var(--text-primary); }
 
@@ -347,6 +346,7 @@ section{ padding: 110px 0; position:relative; }
   padding: 2rem; backdrop-filter: blur(16px);
   transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
   position:relative; overflow:hidden;
+  contain: layout paint;
 }
 .feature-card::before{
   content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
@@ -550,8 +550,7 @@ section{ padding: 110px 0; position:relative; }
 /* ==========================================================================
    TILT / MAGNETIC (JS driven via transform, base styles here)
    ========================================================================== */
-.tilt-card{ transition: transform .25s ease-out; transform-style: preserve-3d; will-change: transform; }
-.btn--magnetic{ will-change: transform; }
+.tilt-card{ transition: transform .25s ease-out; transform-style: preserve-3d; }
 
 /* ==========================================================================
    DEMO MODAL
