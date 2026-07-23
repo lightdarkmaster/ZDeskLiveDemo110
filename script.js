@@ -31,19 +31,56 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loaderFill) loaderFill.style.width = progress + '%';
   }, 220);
 
-  /* ---------- Lenis smooth scroll ---------- */
+  /* ---------- Lenis smooth scroll ----------
+     IMPORTANT: Lenis must only be driven by ONE clock. The original code
+     drove it from BOTH a raw requestAnimationFrame loop AND gsap.ticker at
+     the same time. Every frame Lenis was updated twice (once with a ms
+     timestamp, once with a "seconds*1000" timestamp from the ticker). While
+     the tab is active this mostly goes unnoticed, but requestAnimationFrame
+     and the ticker get throttled independently by the browser when the tab
+     is idle/backgrounded — after a couple of minutes their timestamps drift
+     apart and Lenis receives conflicting deltas, which is what produced the
+     stutter/freeze you saw when coming back to the tab.
+
+     Fix: drive Lenis exclusively through gsap.ticker (the same clock GSAP /
+     ScrollTrigger already use), and disable GSAP's lag-smoothing so that
+     after an idle period GSAP doesn't try to "catch up" by slow-playing
+     everything (that catch-up phase is exactly what reads as a freeze). */
   let lenis;
   if (window.Lenis) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+
     if (window.gsap && window.gsap.ticker) {
       gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+      if (window.ScrollTrigger) {
+        lenis.on('scroll', ScrollTrigger.update);
+      }
+    } else {
+      // Fallback only — used if GSAP failed to load for some reason.
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
     }
   }
+
+  /* Keep Lenis / ScrollTrigger in sync with real scroll position whenever
+     the tab regains visibility. Without this, a Lenis instance that kept
+     "running" (even throttled) under a hidden tab can end up out of sync
+     with the actual scroll offset, which shows up as a jumpy/frozen scroll
+     the moment you switch back. */
+  document.addEventListener('visibilitychange', () => {
+    if (!lenis) return;
+    if (document.hidden) {
+      lenis.stop();
+    } else {
+      lenis.start();
+      lenis.resize();
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    }
+  });
 
   /* ---------- AOS ---------- */
   if (window.AOS) {
@@ -207,11 +244,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- Testimonial slider ---------- */
+  /* ---------- Testimonial slider ----------
+     Uses a single recurring setInterval — but it keeps ticking while the
+     tab is hidden, and the browser can fire several "missed" callbacks
+     back-to-back once the tab becomes visible again (setInterval doesn't
+     pause, it just queues/coalesces). We now pause it on hidden and resume
+     cleanly on visible, matching the pattern already used by the particle
+     canvas, so nothing tries to "catch up" with a burst of slide changes. */
   const track = document.getElementById('testiTrack');
   const dotsWrap = document.getElementById('testiDots');
   const cards = track ? Array.from(track.children) : [];
   let activeIndex = 0;
+  let testiInterval = null;
+
+  function startTestimonialAutoplay() {
+    if (testiInterval || !cards.length) return;
+    testiInterval = setInterval(() => {
+      setActiveTestimonial((activeIndex + 1) % cards.length);
+    }, 5000);
+  }
+  function stopTestimonialAutoplay() {
+    clearInterval(testiInterval);
+    testiInterval = null;
+  }
 
   if (cards.length) {
     cards.forEach((card, i) => {
@@ -230,9 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
       dotsWrap.children[activeIndex].classList.add('active');
     }
 
-    setInterval(() => {
-      setActiveTestimonial((activeIndex + 1) % cards.length);
-    }, 5000);
+    startTestimonialAutoplay();
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopTestimonialAutoplay();
+      else startTestimonialAutoplay();
+    });
   }
 
   /* ---------- Accordion ---------- */
