@@ -19,6 +19,7 @@ This project contains code and configuration for integrating with Zoho Desk. It 
 
 - Update the configuration with your Zoho Desk account details.
 - Execute the integration flow to synchronize tickets and support information.
+- Integrate Zoho Applications seemlessly. 
 
 ## Notes
 
