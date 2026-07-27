@@ -20,7 +20,7 @@ function loadZohoDeskASAP() {
                 }
             });
 
-            window.ZohoDeskAsap__asyncalls = null;
+            window.ZohoDeskAsap__asyncalls = null; 
         } else if (callback) {
             queue.push(callback);
         }
@@ -32,8 +32,7 @@ function loadZohoDeskASAP() {
     script.id = "zohodeskasapscript";
     script.defer = true;
 
-    // Optional: Set CSP nonce if your application uses one
-    // script.nonce = "YOUR_NONCE_VALUE";
+    
 
     script.src = "https://desk.zoho.com/portal/api/web/asapApp/1419133000000473326?orgId=931771208";
 
