@@ -26,3 +26,4 @@ This project contains code and configuration for integrating with Zoho Desk. It 
 - Ensure API credentials are stored securely.
 - Review Zoho Desk documentation for endpoint details and limits.
 - This README is a starting point and may be extended with project-specific instructions.
+- For Project purposes only..
